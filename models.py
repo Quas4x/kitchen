@@ -11,13 +11,12 @@ class Dish:
         self.preparation_method = preparation_method
         self.difficulty = difficulty        # Сложность приготоволения от 1 до 10
 
-    def sum_of_cpfc(self, element: str):
-        sum_of_element = 0
+    def count_param_for_proportions(self, element: str):
+        count_of_element = 0
         for i in self.ingredients:
-            if i == element:
-                sum_of_element += self.ingredients[i]
+            count_of_element += getattr(i, element) * (self.ingredients[i] / 100 ) # Умножаем параметр ингридиента на его массу (в кг) в данном блюде
 
-        return sum_of_element
+        return count_of_element
 
 
 class Ingredient:
