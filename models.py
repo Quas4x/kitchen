@@ -37,11 +37,11 @@ class Ingredient:
             value = getattr(self, param)
             if not is_number(value):
                 raise TypeError(
-                    f"Поле {param} ингредиента '{self.name}' должно быть числом, получено {value!r}"
+                    f"Поле {param} ингредиента '{self.name}' должно быть числом, получено '{value}'"
                 )
             if value < 0:
                 raise ValueError(
-                    f"Поле {param} ингредиента '{self.name}' не может быть отрицательным, получено {value}"
+                    f"Поле {param} ингредиента '{self.name}' не может быть отрицательным, получено '{value}'"
                 )
 
     def count_param_for_proportions(self, weight: float) -> dict:
@@ -82,9 +82,9 @@ class Dish:
             )
 
         if isinstance(self.difficulty, bool) or not isinstance(self.difficulty, int):
-            raise TypeError(f"Сложность блюда '{self.name}' должна быть целым числом, получено {self.difficulty!r}")
+            raise TypeError(f"Сложность блюда '{self.name}' должна быть целым числом, получено '{self.difficulty}'")
         if not 1 <= self.difficulty <= 10:
-            raise ValueError(f"Сложность блюда '{self.name}' должна быть от 1 до 10, получено {self.difficulty}")
+            raise ValueError(f"Сложность блюда '{self.name}' должна быть от 1 до 10, получено '{self.difficulty}'")
 
         if not isinstance(self.ingredients, dict):
             raise TypeError(
@@ -97,15 +97,15 @@ class Dish:
         for ingredient, weight in self.ingredients.items():
             if not isinstance(ingredient, Ingredient):
                 raise TypeError(
-                    f"Ключами в ингредиентах блюда '{self.name}' должны быть объекты Ingredient, получено {ingredient!r}"
+                    f"Ключами в ингредиентах блюда '{self.name}' должны быть объекты Ingredient, получено '{ingredient}'"
                 )
             if not is_number(weight):
                 raise TypeError(
-                    f"Вес ингредиента '{ingredient.name}' в блюде '{self.name}' должен быть числом, получено {weight!r}"
+                    f"Вес ингредиента '{ingredient.name}' в блюде '{self.name}' должен быть числом, получено '{weight}'"
                 )
             if weight <= 0:
                 raise ValueError(
-                    f"Вес ингредиента '{ingredient.name}' в блюде '{self.name}' должен быть больше нуля, получено {weight}"
+                    f"Вес ингредиента '{ingredient.name}' в блюде '{self.name}' должен быть больше нуля, получено '{weight}'"
                 )
 
     def count_dish_from_ingridients(self) -> dict:
@@ -117,3 +117,4 @@ class Dish:
                 count_of_dish[param] = count_of_dish.get(param, 0) + value
 
         return count_of_dish
+    
