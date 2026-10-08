@@ -2,15 +2,15 @@ from models import Dish
 
 
 class DishAlreadyExistsError(ValueError):
-    """Блюдо с таким названием уже есть в книге."""
+    """Блюдо с таким названием уже есть в книге"""
 
 
 class DishNotFoundError(LookupError):
-    """Блюда с таким названием нет в книге."""
+    """Блюда с таким названием нет в книге"""
 
 
 class Cookbook:
-    """Хранит блюда и управляет ими. Ничего не печатает и не спрашивает у пользователя."""
+    """Хранит блюда и управляет ими. Ничего не печатает и не спрашивает у пользователя"""
 
     def __init__(self, name: str, dishes=None):
         if not isinstance(name, str):
@@ -19,10 +19,8 @@ class Cookbook:
             raise ValueError("Название книги не может быть пустым")
 
         self.name = name
-        self._dishes = {}   # {нормализованное название: Dish}
+        self._dishes = {}
 
-        # Начальные блюда добавляем через тот же метод add,
-        # чтобы на них распространялись те же проверки
         if dishes is not None:
             for dish in dishes:
                 self.add(dish)
@@ -43,7 +41,7 @@ class Cookbook:
         self._dishes[key] = dish
 
     def remove(self, name: str) -> Dish:
-        """Удаляет блюдо и возвращает его (например, чтобы CLI мог написать, что именно удалено)."""
+        """Удаляет блюдо и возвращает его"""
         key = self._key(name)
         if key not in self._dishes:
             raise DishNotFoundError(f"Блюда '{name}' нет в книге '{self.name}'")
@@ -62,5 +60,6 @@ class Cookbook:
         return self._key(name) in self._dishes
 
     def get_all(self) -> list:
-        """Возвращает копию списка блюд, чтобы снаружи нельзя было случайно испортить хранилище."""
+        """Возвращает копию списка блюд, чтобы снаружи нельзя было случайно испортить хранилище"""
         return list(self._dishes.values())
+    
