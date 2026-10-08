@@ -1,10 +1,10 @@
 def is_number(value) -> bool:
-    """Проверяет, что значение - int или float, но не bool."""
+    """Проверяет, что значение - int или float, но не bool"""
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 
 class Ingredient:
-    """Ингредиент: название, КБЖУ и цена (все значения на 100 г)."""
+    """Ингредиент: название, КБЖУ и цена (все значения на 100 г.)"""
 
     # Явный список полей, которые пересчитываются пропорционально массе
     NUMERIC_PARAMS = ("calories", "proteins", "fats", "carbohydrats", "price")
@@ -45,7 +45,7 @@ class Ingredient:
                 )
 
     def count_param_for_proportions(self, weight: float) -> dict:
-        """Считает все параметры ингредиента пропорционально его массе (масса в кг)."""
+        """Считает все параметры ингредиента пропорционально его массе (масса в кг.)"""
         count_of_element = {}
         for param in self.NUMERIC_PARAMS:
             # Значения заданы на 100 г, масса в кг: 1 кг = 10 * 100 г
@@ -109,7 +109,7 @@ class Dish:
                 )
 
     def count_dish_from_ingridients(self) -> dict:
-        """Суммирует параметры всех ингредиентов блюда с учётом их массы."""
+        """Суммирует параметры всех ингредиентов блюда с учётом их массы"""
         count_of_dish = {}
         for ingredient, weight in self.ingredients.items():
             count_of_ingredient = ingredient.count_param_for_proportions(weight)
